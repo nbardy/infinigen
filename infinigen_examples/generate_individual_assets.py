@@ -53,6 +53,7 @@ from infinigen.assets.lighting import (
 from infinigen.assets.utils.decorate import read_base_co, read_co
 from infinigen.assets.utils.misc import assign_material
 from infinigen.core import init, surface
+from infinigen.core.registry import central_registry
 from infinigen.core.init import configure_cycles_devices
 from infinigen.core.placement import density
 from infinigen.core.tagging import tag_system
@@ -304,7 +305,7 @@ def build_and_save_asset(payload: dict):
             holdout_lighting.add_lighting()
             three_point_lighting.add_lighting(asset)
         else:
-            sky_lighting.add_lighting(camera)
+            central_registry.lights.sample("default").add_lighting(camera)
             nodes = bpy.data.worlds["World"].node_tree.nodes
             sky_texture = [n for n in nodes if n.name.startswith("Sky Texture")][-1]
             sky_texture.sun_elevation = np.deg2rad(args.elevation)

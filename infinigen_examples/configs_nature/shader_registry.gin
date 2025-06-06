@@ -1,0 +1,6 @@
+central_registry.light_categories.default = [
+    ('sky_lighting', 1),
+]
+central_registry.material_categories.stylized = [
+    ('mud', 1),
+]

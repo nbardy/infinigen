@@ -77,6 +77,7 @@ from infinigen.assets.scatters import (
 )
 from infinigen.assets.scatters.utils.selection import scatter_lower, scatter_upward
 from infinigen.core import execute_tasks, init, surface
+from infinigen.core.registry import central_registry
 from infinigen.core.placement import camera as cam_util
 from infinigen.core.placement import density, placement, split_in_view
 from infinigen.core.util import blender as butil
@@ -297,7 +298,7 @@ def compose_nature(output_folder, scene_seed, **params):
 
     p.run_stage(
         "lighting",
-        lighting.sky_lighting.add_lighting,
+        central_registry.lights.sample("default").add_lighting,
         primary_cams[0],
         use_chance=False,
     )

@@ -42,6 +42,7 @@ from infinigen.assets.utils.decorate import read_base_co, read_co, read_normal
 from infinigen.assets.utils.misc import subclasses
 from infinigen.assets.utils.object import center, new_cube, origin2lowest
 from infinigen.core import init, surface
+from infinigen.core.registry import central_registry
 from infinigen.core.init import configure_cycles_devices
 from infinigen.core.placement import factory
 from infinigen.core.surface import write_attr_data
@@ -174,7 +175,7 @@ def build_scene(path, idx, factory_name, args):
                 holdout_lighting.add_lighting()
                 three_point_lighting.add_lighting(asset)
             else:
-                sky_lighting.add_lighting(camera)
+                central_registry.lights.sample("default").add_lighting(camera)
                 nodes = bpy.data.worlds["World"].node_tree.nodes
                 sky_texture = [n for n in nodes if n.name.startswith("Sky Texture")][-1]
                 sky_texture.sun_elevation = np.deg2rad(args.elevation)
