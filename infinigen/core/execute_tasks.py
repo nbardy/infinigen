@@ -19,6 +19,7 @@ import gin
 
 import infinigen.assets.scatters
 from infinigen.core import init, surface
+from infinigen.core.registry import central_registry
 from infinigen.core.placement import camera as cam_util
 from infinigen.core.rendering.render import render_image
 from infinigen.core.rendering.resample import resample_scene
@@ -237,6 +238,7 @@ def execute_tasks(
     bpy.context.view_layer.update()
 
     surface.registry.initialize_from_gin()
+    central_registry.initialize_from_gin()
     init.configure_blender()
 
     if Task.Coarse in task:

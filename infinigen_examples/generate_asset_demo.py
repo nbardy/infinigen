@@ -23,6 +23,7 @@ logging.basicConfig(
 )
 
 from infinigen.assets.lighting import sky_lighting
+from infinigen.core.registry import central_registry
 from infinigen.assets.objects.creatures.util.animation.run_cycle import follow_path
 from infinigen.assets.scatters import grass, pebbles, pine_needle, pinecone
 from infinigen.assets.weather import kole_clouds
@@ -106,7 +107,7 @@ def compose_scene(
     asset_offset=(0, 0, 0),
     **params,
 ):
-    sky_lighting.add_lighting()
+    central_registry.lights.sample("default").add_lighting()
 
     if params.get("fancy_clouds", 0):
         kole_clouds.add_kole_clouds()

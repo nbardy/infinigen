@@ -25,6 +25,7 @@ from infinigen.assets.objects.wall_decorations.skirting_board import make_skirti
 from infinigen.assets.placement.floating_objects import FloatingObjectPlacement
 from infinigen.assets.utils.decorate import read_co
 from infinigen.core import execute_tasks, init, placement, surface, tagging
+from infinigen.core.registry import central_registry
 from infinigen.core import tags as t
 from infinigen.core.constraints import checks
 from infinigen.core.constraints import constraint_language as cl
@@ -152,7 +153,11 @@ def compose_indoors(output_folder: Path, scene_seed: int, **overrides):
         "terrain", add_coarse_terrain, use_chance=False, default=(None, None)
     )
 
-    p.run_stage("sky_lighting", lighting.sky_lighting.add_lighting, use_chance=False)
+    p.run_stage(
+        "sky_lighting",
+        central_registry.lights.sample("default").add_lighting,
+        use_chance=False,
+    )
 
     consgraph = home_constraints.home_furniture_constraints()
     consgraph_rooms = home_constraints.home_room_constraints()

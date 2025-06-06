@@ -1,0 +1,8 @@
+central_registry.material_categories.stylized = [
+    ('glass_volume', 1),
+    ('marble', 1),
+]
+central_registry.light_categories.default = [
+    ('three_point_lighting', 1),
+    ('hdri_lighting', 1),
+]
